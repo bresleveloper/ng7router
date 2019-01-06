@@ -1,0 +1,16 @@
+
+
+<div class="navigation">
+  <button mat-raised-button color="primary" routerLink="/home" routerLinkActive="active">Home</button>
+  <button mat-raised-button color="primary" routerLink="/second" routerLinkActive="active">Second</button>
+
+  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">Friends</button>
+    <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/person/1">Mr. Bin</button>
+    <button mat-menu-item routerLink="/person/2">Superman</button>
+    <button mat-menu-item routerLink="/person/3">Batman</button>
+    <button mat-menu-item routerLink="/person/4">Robbin</button>
+    </mat-menu>
+
+
+</div>
