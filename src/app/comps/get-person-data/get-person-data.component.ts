@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
-import { ActivatedRoute, Router, CanActivate } from '@angular/router';
+import { ActivatedRoute, Router, CanActivate, NavigationStart, 
+    ChildActivationEnd, ActivationEnd, Scroll } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -13,13 +14,28 @@ export class GetPersonDataComponent implements OnInit, OnDestroy {
   person:{}
 
   private subs:Subscription[] = []
+
   constructor(private route: ActivatedRoute, private router:Router) { 
-      //show events, show with no unsubscripe
-      //this.subs.push(router.events.subscribe(console.log))
+      //show events, show with no unsubscribe
+      //show only ngOnInit
+      this.subs.push(router.events.subscribe(console.log))
+      this.subs.push(router.events.subscribe(e=>{
+          if (e instanceof NavigationStart) {
+              console.log ('yee navi start')
+          }
+          if (e instanceof Scroll ) {
+            console.log ('yee navi Scroll ')
+              
+          }
+      }))
       route.params.subscribe(console.log)
       route.params.subscribe(params => this.person = this.persons[params['id']])
   }
-
+  
+  ngOnDestroy() {
+    this.subs.forEach(s => s.unsubscribe())  //s['unsubscribe']()
+    //s[show ? 'show' : 'hide']()
+  }
 
   persons = {
       "1" : { name: 'Mr. Bin'},
@@ -33,9 +49,7 @@ export class GetPersonDataComponent implements OnInit, OnDestroy {
     this.person = this.persons[id]
   }
 
-  ngOnDestroy() {
-    this.subs.forEach(s => s.unsubscribe())
-  }
+
   
 
 

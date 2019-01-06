@@ -21,6 +21,13 @@ const routes: Routes = [
         //https://angular.io/guide/router#milestone-5-route-guards
         //show deactivated
         canActivate:[PersonGuardService]
+        /*
+            CanActivate
+            CanActivateChild
+            CanDeactivate
+            CanLoad
+            Resolve
+        */
     },
 
     { path:'',          redirectTo:'/home',  pathMatch: 'full'},

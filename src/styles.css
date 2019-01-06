@@ -8,3 +8,7 @@ body{
 
 .navigation{text-align: center;}
 .navigation button{margin: 0 5px ;}
+
+/*.active{font-weight: bold; background-color: pink}*/
+
+button.mat-raised-button.mat-primary.active{background-color: palevioletred}
